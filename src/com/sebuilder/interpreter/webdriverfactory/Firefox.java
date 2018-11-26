@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.HashMap;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -44,6 +45,9 @@ public class Firefox implements WebDriverFactory {
 		HashMap<String, String> caps = new HashMap<String, String>(config);
 		caps.remove("binary");
 		caps.remove("profile");
-		return new FirefoxDriver(fb, fp, new DesiredCapabilities(caps));
+		FirefoxOptions options = new FirefoxOptions(new DesiredCapabilities(caps));
+		options.setProfile(fp);
+		options.setBinary(fb);
+		return new FirefoxDriver(options);
 	}
 }
